@@ -15,14 +15,12 @@ def get_word_tag(line, vocab):
     if not line.split():
         word = "--n--"
         tag = "--s--"
-        return word, tag
     else:
         word, tag = line.split()
         if word not in vocab: 
             # Handle unknown words
             word = assign_unk(word)
-        return word, tag
-    return None 
+    return word, tag 
 
 
 def preprocess(vocab, data_fp):
@@ -35,8 +33,7 @@ def preprocess(vocab, data_fp):
     # Read data
     with open(data_fp, "r") as data_file:
 
-        for cnt, word in enumerate(data_file):
-
+        for word in data_file:
             # End of sentence
             if not word.split():
                 orig.append(word.strip())

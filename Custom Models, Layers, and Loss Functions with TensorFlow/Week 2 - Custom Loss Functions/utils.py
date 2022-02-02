@@ -30,50 +30,52 @@ def test_my_rmse(my_rmse):
 
     test_y_true = np.array([-1.0,  0.0, 1.0, 2.0, 3.0, 4.0], dtype=float)
     test_y_pred = np.array([-3.0, -1.0, 1.0, 3.0, 5.0, 7.0], dtype=float)
-    
+
     expected = 1.7795130420052185
-    
+
     result = my_rmse(test_y_true, test_y_pred)
-    
+
     test_cases = [
         {
             "name": "type_check",
             "result": type(result),
             "expected": EagerTensor,
-            "error_message": f'output has an incorrect type.'
+            "error_message": 'output has an incorrect type.',
         },
         {
             "name": "output_check",
             "result": result,
             "expected": expected,
-            "error_message": "Output is incorrect. Please check the equation."
-        }
+            "error_message": "Output is incorrect. Please check the equation.",
+        },
     ]
-    
+
+
     test_loop(test_cases)
     
 def test_model_loss(model_loss):
     
     test_y_true = np.array([-1.0,  0.0, 1.0, 2.0, 3.0, 4.0], dtype=float)
     test_y_pred = np.array([-3.0, -1.0, 1.0, 3.0, 5.0, 7.0], dtype=float)
-    
+
     expected = 1.7795130420052185
-    
+
     result = model_loss(test_y_true, test_y_pred)
-    
+
     test_cases = [
         {
             "name": "type_check",
             "result": type(result),
             "expected": EagerTensor,
-            "error_message": f'output has an incorrect type.'
+            "error_message": 'output has an incorrect type.',
         },
         {
             "name": "output_check",
             "result": result,
             "expected": expected,
-            "error_message": "Output is incorrect. Please check the equation."
-        }
+            "error_message": "Output is incorrect. Please check the equation.",
+        },
     ]
-    
+
+
     test_loop(test_cases)

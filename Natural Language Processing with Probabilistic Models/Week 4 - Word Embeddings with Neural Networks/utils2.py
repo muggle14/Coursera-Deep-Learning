@@ -9,10 +9,7 @@ def sigmoid(z):
 
 
 def get_idx(words, word2Ind):
-    idx = []
-    for word in words:
-        idx = idx + [word2Ind[word]]
-    return idx
+    return [word2Ind[word] for word in words]
 
 
 def pack_idx_with_frequency(context_words, word2Ind):
@@ -53,9 +50,8 @@ def get_batches(data, word2Ind, V, C, batch_size):
         while len(batch_x) < batch_size:
             batch_x.append(x)
             batch_y.append(y)
-        else:
-            yield np.array(batch_x).T, np.array(batch_y).T
-            batch = []
+        yield np.array(batch_x).T, np.array(batch_y).T
+        batch = []
 
 
 def compute_pca(data, n_components=2):
@@ -108,12 +104,10 @@ def get_dict(data):
 #     words = nltk.word_tokenize(data)
     words = sorted(list(set(data)))
     n = len(words)
-    idx = 0
     # return these correctly
     word2Ind = {}
     Ind2word = {}
-    for k in words:
+    for idx, k in enumerate(words):
         word2Ind[k] = idx
         Ind2word[idx] = k
-        idx += 1
     return word2Ind, Ind2word

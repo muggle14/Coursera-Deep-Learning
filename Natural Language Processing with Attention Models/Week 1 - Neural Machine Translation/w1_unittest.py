@@ -22,17 +22,14 @@ def jaccard_similarity(candidate, reference):
     
     # convert the lists to a set to get the unique tokens
     can_unigram_set, ref_unigram_set = set(candidate), set(reference)  
-    
+
     # get the set of tokens common to both candidate and reference
     joint_elems = can_unigram_set.intersection(ref_unigram_set)
-    
+
     # get the set of all tokens found in either candidate or reference
     all_elems = can_unigram_set.union(ref_unigram_set)
-    
-    # divide the number of joint elements by the number of all elements
-    overlap = len(joint_elems) / len(all_elems)
-    
-    return overlap
+
+    return len(joint_elems) / len(all_elems)
 
 
 def weighted_avg_overlap(similarity_fn, samples, log_probs):

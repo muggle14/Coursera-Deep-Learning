@@ -61,10 +61,5 @@ def lookup(freqs, word, label):
     Output:
         n: the number of times the word with its corresponding label appears.
     '''
-    n = 0  # freqs.get((word, label), 0)
-
     pair = (word, label)
-    if (pair in freqs):
-        n = freqs[pair]
-
-    return n
+    return freqs[pair] if (pair in freqs) else 0
