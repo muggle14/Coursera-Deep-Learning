@@ -32,81 +32,84 @@ def test_simple_quadratic(SimpleQuadratic):
     expected_activation_string = 'relu'
     shape_0 = 8
     shape_1 = 2
-    
+
     test_layer = SimpleQuadratic(units=expected_units, activation=expected_activation_string)
-    
+
     test_layer.build((shape_0, shape_1))
 
     test_inputs = tf.random.uniform((shape_0, shape_1))
-    
+
     test_call_value = test_layer.call(test_inputs)
-    
+
     a_type = type(test_layer.a)
     b_type = type(test_layer.b)
     c_type = type(test_layer.c)
-    
+
     test_layer_forced_weights = SimpleQuadratic(units=1, activation=None)
     test_layer_forced_weights.a = tf.constant([2.0], dtype='float32', shape=(1,1))
     test_layer_forced_weights.b = tf.constant([2.0], dtype='float32', shape=(1,1))
     test_layer_forced_weights.c = tf.constant([2.0], dtype='float32', shape=(1,1))
     test_layer_forced_weights_inputs = tf.constant([4.0], dtype='float32', shape=(1,1))
     test_layer_forced_weights_expected_output = 42.0
-    
+
     test_cases = [
         {
             "name": "units_check",
             "result": test_layer.units,
             "expected": expected_units,
-            "error_message": f'Incorrect number of units.'
+            "error_message": 'Incorrect number of units.',
         },
         {
             "name": "activations_check",
             "result": test_layer.activation,
             "expected": tf.keras.activations.relu,
-            "error_message": "Got different activation function."
+            "error_message": "Got different activation function.",
         },
         {
             "name": "a_type_check",
             "result": a_type,
             "expected": ResourceVariable,
-            "error_message": f'State variable a is of different type. Expected ResourceVariable but got {a_type}'
+            "error_message": f'State variable a is of different type. Expected ResourceVariable but got {a_type}',
         },
         {
             "name": "b_type_check",
             "result": b_type,
             "expected": ResourceVariable,
-            "error_message": f'State variable b is of different type. Expected ResourceVariable but got {b_type}'
+            "error_message": f'State variable b is of different type. Expected ResourceVariable but got {b_type}',
         },
         {
             "name": "c_type_check",
             "result": c_type,
             "expected": ResourceVariable,
-            "error_message": f'State variable c is of different type. Expected ResourceVariable but got {c_type}'
+            "error_message": f'State variable c is of different type. Expected ResourceVariable but got {c_type}',
         },
         {
             "name": "a_initializer_check",
             "result": test_layer.a.numpy().sum() != 0,
             "expected": True,
-            "error_message": f'State variable a is not initialized randomly. Please check initializer used.'
+            "error_message": 'State variable a is not initialized randomly. Please check initializer used.',
         },
         {
             "name": "b_initializer_check",
             "result": test_layer.b.numpy().sum() != 0,
             "expected": True,
-            "error_message": f'State variable b is not initialized randomly. Please check initializer used.'
+            "error_message": 'State variable b is not initialized randomly. Please check initializer used.',
         },
         {
             "name": "c_initializer_check",
             "result": test_layer.c.numpy().sum() == 0,
             "expected": True,
-            "error_message": f'State variable c is not initialized to zeroes. Please check initializer used.'
+            "error_message": 'State variable c is not initialized to zeroes. Please check initializer used.',
         },
         {
             "name": "output_check",
-            "result": test_layer_forced_weights.call(test_layer_forced_weights_inputs).numpy()[0][0],
+            "result": test_layer_forced_weights.call(
+                test_layer_forced_weights_inputs
+            ).numpy()[0][0],
             "expected": test_layer_forced_weights_expected_output,
-            "error_message": f'Expected output is incorrect. Please check operations in the call() method.'
-        }
+            "error_message": 'Expected output is incorrect. Please check operations in the call() method.',
+        },
     ]
-    
+
+
     test_loop(test_cases)

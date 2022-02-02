@@ -33,22 +33,23 @@ def test_white_df(white_df):
             "name": "type_check",
             "result": type(white_df.is_red[0]),
             "expected": np.int64,
-            "error_message": f'white_df.is_red has an incorrect type.'
+            "error_message": 'white_df.is_red has an incorrect type.',
         },
         {
             "name": "output_check",
             "result": white_df.is_red[0],
             "expected": 0,
-            "error_message": "white_df.is_red is not set correctly"
+            "error_message": "white_df.is_red is not set correctly",
         },
         {
             "name": "len_check",
             "result": len(white_df),
             "expected": 3961,
-            "error_message": "Number of rows is incorrect. Please drop duplicates."
-        }
+            "error_message": "Number of rows is incorrect. Please drop duplicates.",
+        },
     ]
-    
+
+
     test_loop(test_cases)
     
 def test_red_df(red_df):
@@ -58,22 +59,23 @@ def test_red_df(red_df):
             "name": "type_check",
             "result": type(red_df.is_red[0]),
             "expected": np.int64,
-            "error_message": f'red_df.is_red has an incorrect type.'
+            "error_message": 'red_df.is_red has an incorrect type.',
         },
         {
             "name": "output_check",
             "result": red_df.is_red[0],
             "expected": 1,
-            "error_message": "red_df.is_red is not set correctly"
+            "error_message": "red_df.is_red is not set correctly",
         },
         {
             "name": "len_check",
             "result": len(red_df),
             "expected": 1359,
-            "error_message": "Number of rows is incorrect. Please drop duplicates."
-        }
+            "error_message": "Number of rows is incorrect. Please drop duplicates.",
+        },
     ]
-    
+
+
     test_loop(test_cases)
     
 def test_df_drop(df):
@@ -83,16 +85,17 @@ def test_df_drop(df):
             "name": "df.alcohol[0]_check",
             "result": df.alcohol[0],
             "expected": 9.4,
-            "error_message": f'Value is not as expected. Please check quality interval.'
+            "error_message": 'Value is not as expected. Please check quality interval.',
         },
         {
             "name": "df.alcohol[100]_check",
             "result": df.alcohol[100],
             "expected": 10.9,
-            "error_message": f'Value is not as expected. Please check quality interval.'
-        }
+            "error_message": 'Value is not as expected. Please check quality interval.',
+        },
     ]
-    
+
+
     test_loop(test_cases)
 
 def test_data_sizes(train_size, test_size, val_size):
@@ -102,113 +105,116 @@ def test_data_sizes(train_size, test_size, val_size):
             "name": "train_test_size_check",
             "result": train_size > test_size,
             "expected": True,
-            "error_message": f'train.size is too small. Please check implementation.'
+            "error_message": 'train.size is too small. Please check implementation.',
         },
         {
             "name": "train_val_size_check",
             "result": train_size > val_size,
             "expected": True,
-            "error_message": f'train.size is too small. Please check implementation.'
+            "error_message": 'train.size is too small. Please check implementation.',
         },
         {
             "name": "test_val_size_check",
             "result": test_size > val_size,
             "expected": True,
-            "error_message": f'test.size is too small. Please check implementation.'
-        }
+            "error_message": 'test.size is too small. Please check implementation.',
+        },
     ]
-    
+
+
     test_loop(test_cases)
 
 def test_format_output(df, train_Y, val_Y, test_Y):
     
     train, test = train_test_split(df, test_size=0.2, random_state=1)
     train, val = train_test_split(train, test_size=0.2, random_state=1)
-    
+
     test_cases = [
         {
             "name": "train_Y[0]_check",
             "result": np.all(train_Y[0] == np.array(train.quality)),
             "expected": True,
-            "error_message": f'train_Y[0] is not equal to train.quality. Please check implementation.'
+            "error_message": 'train_Y[0] is not equal to train.quality. Please check implementation.',
         },
         {
             "name": "train_Y[1]_check",
             "result": np.all(train_Y[1] == np.array(train.is_red)),
             "expected": True,
-            "error_message": f'train_Y[1] is not equal to train.is_red. Please check implementation.'
+            "error_message": 'train_Y[1] is not equal to train.is_red. Please check implementation.',
         },
         {
             "name": "val_Y[0]_check",
             "result": np.all(val_Y[0] == np.array(val.quality)),
             "expected": True,
-            "error_message": f'train_Y[0] is not equal to val.quality. Please check implementation.'
+            "error_message": 'train_Y[0] is not equal to val.quality. Please check implementation.',
         },
         {
             "name": "val_Y[1]_check",
             "result": np.all(val_Y[1] == np.array(val.is_red)),
             "expected": True,
-            "error_message": f'train_Y[1] is not equal to val.is_red. Please check implementation.'
+            "error_message": 'train_Y[1] is not equal to val.is_red. Please check implementation.',
         },
         {
             "name": "test_Y[0]_check",
             "result": np.all(test_Y[0] == np.array(test.quality)),
             "expected": True,
-            "error_message": f'test_Y[0] is not equal to test.quality. Please check implementation.'
+            "error_message": 'test_Y[0] is not equal to test.quality. Please check implementation.',
         },
         {
             "name": "test_Y[1]_check",
             "result": np.all(test_Y[1] == np.array(test.is_red)),
             "expected": True,
-            "error_message": f'test_Y[1] is not equal to test.is_red. Please check implementation.'
-        }
+            "error_message": 'test_Y[1] is not equal to test.is_red. Please check implementation.',
+        },
     ]
-    
+
+
     test_loop(test_cases)
 
 def test_norm(norm_train_X, norm_val_X, norm_test_X, train, val, test):
     
     from pandas.core.frame import DataFrame
-    
+
     test_cases = [
         {
             "name": "norm_train_X_type_check",
             "result": type(norm_train_X),
             "expected": DataFrame,
-            "error_message": f'norm_train_X has an incorrect type.'
+            "error_message": 'norm_train_X has an incorrect type.',
         },
         {
             "name": "norm_val_X_type_check",
             "result": type(norm_val_X),
             "expected": DataFrame,
-            "error_message": f'norm_val_X has an incorrect type.'
+            "error_message": 'norm_val_X has an incorrect type.',
         },
         {
             "name": "norm_test_X_type_check",
             "result": type(norm_test_X),
             "expected": DataFrame,
-            "error_message": f'norm_test_X has an incorrect type.'
+            "error_message": 'norm_test_X has an incorrect type.',
         },
         {
             "name": "norm_train_X_length_check",
             "result": len(norm_train_X),
             "expected": len(train),
-            "error_message": f'norm_train_X has an incorrect length.'
+            "error_message": 'norm_train_X has an incorrect length.',
         },
         {
             "name": "norm_val_X_length_check",
             "result": len(norm_val_X),
             "expected": len(val),
-            "error_message": f'norm_val_X has an incorrect length.'
+            "error_message": 'norm_val_X has an incorrect length.',
         },
         {
             "name": "norm_test_X_length_check",
             "result": len(norm_test_X),
             "expected": len(test),
-            "error_message": f'norm_test_X has an incorrect length.'
+            "error_message": 'norm_test_X has an incorrect length.',
         },
     ]
-    
+
+
     test_loop(test_cases)
 
 def test_base_model(base_model):
@@ -289,33 +295,42 @@ def test_model_compile(model):
             "name": "metrics_0_check",
             "result": type(model.metrics[0]),
             "expected": tf.keras.metrics.RootMeanSquaredError,
-            "error_message": 'wine quality metrics is incorrect. Please check implementation.'
+            "error_message": 'wine quality metrics is incorrect. Please check implementation.',
         },
         {
             "name": "metrics_1_check",
-            "result": (model.metrics[1].name == 'wine_type_accuracy') or 
-                      (model.metrics[1].name == 'wine_type_binary_accuracy'),
+            "result": model.metrics[1].name
+            in ['wine_type_accuracy', 'wine_type_binary_accuracy'],
             "expected": True,
-            "error_message": f'wine type metrics: {model.metrics[1].name} is incorrect. Please check implementation.'
+            "error_message": f'wine type metrics: {model.metrics[1].name} is incorrect. Please check implementation.',
         },
         {
             "name": "wine_type_loss_check",
-            "result": (model.loss['wine_type'] == 'binary_crossentropy') or 
-                      (model.loss['wine_type'].name == 'binary_crossentropy') or 
-                      (str(model.loss['wine_type']).split()[1] == 'binary_crossentropy'),
+            "result": (model.loss['wine_type'] == 'binary_crossentropy')
+            or (model.loss['wine_type'].name == 'binary_crossentropy')
+            or (
+                str(model.loss['wine_type']).split()[1]
+                == 'binary_crossentropy'
+            ),
             "expected": True,
-            "error_message": f'wine type loss: {model.loss["wine_type"]} is incorrect. Please check implementation.'
+            "error_message": f'wine type loss: {model.loss["wine_type"]} is incorrect. Please check implementation.',
         },
         {
             "name": "wine_quality_loss_check",
-            "result": (model.loss['wine_quality'] in ['mse', 'mean_squared_error']) or 
-                      (str(model.loss['wine_quality']).split()[1] == 'mean_squared_error') or 
-                      (model.loss['wine_quality'].name == 'mean_squared_error'),
+            "result": (
+                model.loss['wine_quality'] in ['mse', 'mean_squared_error']
+            )
+            or (
+                str(model.loss['wine_quality']).split()[1]
+                == 'mean_squared_error'
+            )
+            or (model.loss['wine_quality'].name == 'mean_squared_error'),
             "expected": True,
-            "error_message": f'wine quality loss: {model.loss["wine_type"]} is incorrect. Please check implementation.'
+            "error_message": f'wine quality loss: {model.loss["wine_type"]} is incorrect. Please check implementation.',
         },
     ]
-    
+
+
     test_loop(test_cases)
     
 def test_history(history):

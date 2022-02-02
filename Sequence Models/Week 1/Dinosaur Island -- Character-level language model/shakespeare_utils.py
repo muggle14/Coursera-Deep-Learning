@@ -71,8 +71,7 @@ def sample(preds, temperature=1.0):
     exp_preds = np.exp(preds)
     preds = exp_preds / np.sum(exp_preds)
     probas = np.random.multinomial(1, preds, 1)
-    out = np.random.choice(range(len(chars)), p = probas.ravel())
-    return out
+    return np.random.choice(range(len(chars)), p = probas.ravel())
     #return np.argmax(probas)
     
 def on_epoch_end(epoch, logs):
@@ -141,10 +140,9 @@ def generate_output():
     sentence = ('{0:0>' + str(Tx) + '}').format(usr_input).lower()
     generated += usr_input 
 
-    sys.stdout.write("\n\nHere is your poem: \n\n") 
+    sys.stdout.write("\n\nHere is your poem: \n\n")
     sys.stdout.write(usr_input)
-    for i in range(400):
-
+    for _ in range(400):
         x_pred = np.zeros((1, Tx, len(chars)))
 
         for t, char in enumerate(sentence):

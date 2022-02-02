@@ -83,28 +83,28 @@ def plot_vectors(vectors, colors=['k', 'b', 'r', 'm', 'c'], axes=None, fname='im
     scale_units = 'x'
     x_dir = []
     y_dir = []
-    
-    for i, vec in enumerate(vectors):
+
+    for vec in vectors:
         x_dir.append(vec[0][0])
         y_dir.append(vec[0][1])
-    
-    if ax == None:
+
+    if ax is None:
         fig, ax2 = plt.subplots()
     else:
         ax2 = ax
-      
-    if axes == None:
+
+    if axes is None:
         x_axis = 2 + np.max(np.abs(x_dir))
         y_axis = 2 + np.max(np.abs(y_dir))
     else:
         x_axis = axes[0]
         y_axis = axes[1]
-        
+
     ax2.axis([-x_axis, x_axis, -y_axis, y_axis])
-        
+
     for i, vec in enumerate(vectors):
         ax2.arrow(0, 0, vec[0][0], vec[0][1], head_width=0.05 * x_axis, head_length=0.05 * y_axis, fc=colors[i], ec=colors[i])
-    
-    if ax == None:
+
+    if ax is None:
         plt.show()
         fig.savefig(fname)

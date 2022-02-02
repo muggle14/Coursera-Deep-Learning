@@ -117,23 +117,21 @@ def initialize_parameters(n_x, n_h, n_y):
     """
     
     np.random.seed(1)
-    
+
     W1 = np.random.randn(n_h, n_x)*0.01
     b1 = np.zeros((n_h, 1))
     W2 = np.random.randn(n_y, n_h)*0.01
     b2 = np.zeros((n_y, 1))
-    
+
     assert(W1.shape == (n_h, n_x))
     assert(b1.shape == (n_h, 1))
     assert(W2.shape == (n_y, n_h))
     assert(b2.shape == (n_y, 1))
-    
-    parameters = {"W1": W1,
+
+    return {"W1": W1,
                   "b1": b1,
                   "W2": W2,
-                  "b2": b2}
-    
-    return parameters     
+                  "b2": b2}     
 
 
 def initialize_parameters_deep(layer_dims):
@@ -397,23 +395,19 @@ def predict(X, y, parameters):
     m = X.shape[1]
     n = len(parameters) // 2 # number of layers in the neural network
     p = np.zeros((1,m))
-    
+
     # Forward propagation
     probas, caches = L_model_forward(X, parameters)
 
-    
+
     # convert probas to 0/1 predictions
-    for i in range(0, probas.shape[1]):
-        if probas[0,i] > 0.5:
-            p[0,i] = 1
-        else:
-            p[0,i] = 0
-    
+    for i in range(probas.shape[1]):
+        p[0,i] = 1 if probas[0,i] > 0.5 else 0
     #print results
     #print ("predictions: " + str(p))
     #print ("true labels: " + str(y))
     print("Accuracy: "  + str(np.sum((p == y)/m)))
-        
+
     return p
 
 def print_mislabeled_images(classes, X, y, p):

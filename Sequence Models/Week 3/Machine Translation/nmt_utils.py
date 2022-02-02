@@ -138,8 +138,7 @@ def int_to_string(ints, inv_vocab):
     l -- list of characters corresponding to the indexes of ints thanks to the inv_vocab mapping
     """
     
-    l = [inv_vocab[i] for i in ints]
-    return l
+    return [inv_vocab[i] for i in ints]
 
 
 EXAMPLES = ['3 May 1979', '5 Apr 09', '20th February 2016', 'Wed 10 Jul 2007']

@@ -35,65 +35,65 @@ def test_block_class(Block):
     test_block(tf.random.uniform(shape=[2, 3, 4, 5]))
 
     vars_test_block = vars(test_block)
-    
+
     test_cases = [
         {
             "name": "max_pool_type_check",
             "result": type(test_block.max_pool),
             "expected": layers.MaxPooling2D,
-            "error_message": f'Incorrect layer type for self.maxpool'
+            "error_message": 'Incorrect layer type for self.maxpool',
         },
         {
             "name": "max_pool_size_check",
             "result": vars_test_block['max_pool'].pool_size,
             "expected": (pool_size, pool_size),
-            "error_message": f'max pool size incorrect. check parameters.'
+            "error_message": 'max pool size incorrect. check parameters.',
         },
         {
             "name": "max_pool_size_check",
             "result": vars_test_block['max_pool'].strides,
-            "expected": (2,2),
-            "error_message": f'max pool strides incorrect. check parameters.'
+            "expected": (2, 2),
+            "error_message": 'max pool strides incorrect. check parameters.',
         },
         {
             "name": "conv2D_0_type_check",
             "result": type(vars_test_block['conv2D_0']),
             "expected": layers.Conv2D,
-            "error_message": f'Incorrect layer type for block_0'
+            "error_message": 'Incorrect layer type for block_0',
         },
         {
             "name": "conv2D_1_type_check",
             "result": type(vars_test_block['conv2D_1']),
             "expected": layers.Conv2D,
-            "error_message": f'Incorrect layer type for block_0'
+            "error_message": 'Incorrect layer type for block_0',
         },
         {
             "name": "conv2D_0_filters_check",
             "result": vars_test_block['conv2D_0'].filters,
             "expected": filters,
-            "error_message": f'Incorrect filters for Conv2D layer. Please check parameters.'
+            "error_message": 'Incorrect filters for Conv2D layer. Please check parameters.',
         },
         {
             "name": "conv2D_0_kernel_size_check",
             "result": vars_test_block['conv2D_0'].kernel_size,
             "expected": (kernel_size, kernel_size),
-            "error_message": f'Incorrect kernel_size for Conv2D layer. Please check parameters.'
+            "error_message": 'Incorrect kernel_size for Conv2D layer. Please check parameters.',
         },
         {
             "name": "conv2D_0_activation_check",
             "result": vars_test_block['conv2D_0'].activation,
             "expected": tf.keras.activations.relu,
-            "error_message": f'Incorrect activation for Conv2D layer. Please check parameters.'
+            "error_message": 'Incorrect activation for Conv2D layer. Please check parameters.',
         },
-                {
+        {
             "name": "conv2D_0_padding_check",
             "result": vars_test_block['conv2D_0'].padding,
             "expected": padding,
-            "error_message": f'Incorrect padding for Conv2D layer. Please check parameters.'
+            "error_message": 'Incorrect padding for Conv2D layer. Please check parameters.',
         },
-        
     ]
-    
+
+
     test_loop(test_cases)
     
 def test_myvgg_class(MyVGG, Block):
